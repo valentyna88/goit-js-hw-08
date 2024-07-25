@@ -92,6 +92,10 @@ const createImgGalleryTemplate = (image) => {
   `;
 };
 
-const imgGalleryTemplate = images.map(imageInfo => createImgGalleryTemplate(imageInfo)).join('');
+const imageTemplate = images
+  .map((imageInfo) => createImgGalleryTemplate(imageInfo))
+  .join("");
 
+const imagesGalleryEl = document.querySelector(".gallery");
 
+imagesGalleryEl.innerHTML = imageTemplate;
