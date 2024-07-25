@@ -92,6 +92,6 @@ const createImgGalleryTemplate = (image) => {
   `;
 };
 
-const imgGalleryTemplate = images
-  .map((imageInfo) => createImgGalleryTemplate(imageInfo))
-  .join("");
+const imgGalleryTemplate = images.map(imageInfo => createImgGalleryTemplate(imageInfo)).join('');
+
+
