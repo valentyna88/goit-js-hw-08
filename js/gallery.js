@@ -76,3 +76,22 @@ const images = [
   </a>
 </li>
 */
+
+const createImgGalleryTemplate = (image) => {
+  return `
+  <li class="gallery-item">
+    <a class="gallery-link" href="${image.original}">
+      <img
+        class="gallery-image"
+        src="${image.preview}"
+        data-source="${image.original}"
+        alt="${image.description}"
+      />
+    </a>
+  </li>
+  `;
+};
+
+const imgGalleryTemplate = images
+  .map((imageInfo) => createImgGalleryTemplate(imageInfo))
+  .join("");
