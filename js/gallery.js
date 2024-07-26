@@ -77,25 +77,41 @@ const images = [
 </li>
 */
 
-const createImgGalleryTemplate = (image) => {
-  return `
+const galleryContainer = document.querySelector(".gallery");
+
+const createGalleryItemsMarkup = (images) => {
+  return images
+    .map(
+      ({ preview, original, description }) => `
   <li class="gallery-item">
-    <a class="gallery-link" href="${image.original}">
+    <a class="gallery-link" href="${original}">
       <img
         class="gallery-image"
-        src="${image.preview}"
-        data-source="${image.original}"
-        alt="${image.description}"
+        src="${preview}"
+        data-source="${original}"
+        alt="${description}"
       />
     </a>
   </li>
-  `;
+  `
+    )
+    .join("");
 };
 
-const imageTemplate = images
-  .map((imageInfo) => createImgGalleryTemplate(imageInfo))
-  .join("");
+galleryContainer.innerHTML = createGalleryItemsMarkup(images);
 
-const imagesGalleryEl = document.querySelector(".gallery");
+const onGalleryContainerClick = (event) => {
+  event.preventDefault();
 
-imagesGalleryEl.innerHTML = imageTemplate;
+  const target = event.target;
+  if (target.nodeName !== "IMG") return;
+
+  const largeImageURL = target.dataset.source;
+  const instance = basicLightbox.create(
+    `<img src="${largeImageURL}" alt="${target.alt}">`
+  );
+
+  instance.show();
+};
+
+galleryContainer.addEventListener("click", onGalleryContainerClick);
